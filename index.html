@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<style>
+		.grey {
+			background: grey;
+		}
+
+		.yellow {
+			background: yellow;
+		}
+
+		.pink {
+			background: pink;
+		}
+
+		.blue {
+			background: blue;
+		}
+	</style>
+	<script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+</head>
+<body>
+
+<div id="app">
+	<span @mouseover="changeText">Text</span>
+	<p>{{ title }}</p>
+	<p :class="styleCSS">Цвет: {{ styleCSS }}</p>
+	<input type="text" v-on:input="styleCSS = $event.target.value">
+</div>
+	
+<script>
+	new Vue ({
+		el: '#app',
+		data: {
+			title: "Title title title",
+			styleCSS: ''
+		},
+		methods: {
+			changeText () {
+				this.title = "New text"
+			}
+		}
+	})
+</script>
+
+</body>
+</html>
