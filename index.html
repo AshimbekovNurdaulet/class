@@ -30,6 +30,16 @@
 	<p>{{ title }}</p>
 	<p :class="styleCSS">Цвет: {{ styleCSS }}</p>
 	<input type="text" v-on:input="styleCSS = $event.target.value">
+	<br/>
+	<br/>
+	<p v-if="show">Текст1</p>
+	<p v-else> Текст2</p>
+	<button v-on:click="show = !show">Скрыть / Показать</button>
+	
+
+	<ul>
+		<li v-for="(car, i) in cars">{{ i + 1 }} - {{ car.model }}, speed: {{ car.speed }}</li>
+	</ul>
 </div>
 	
 <script>
@@ -37,7 +47,14 @@
 		el: '#app',
 		data: {
 			title: "Title title title",
-			styleCSS: ''
+			styleCSS: '',
+			show: false,
+			cars: [
+				{model: "BMW", speed: 250.8},
+				{model: "Audi", speed: 230.8},
+				{model: "Mers", speed: 220.8},
+				{model: "Ford", speed: 210.8},
+			]
 		},
 		methods: {
 			changeText () {
