@@ -26,15 +26,10 @@
 <body>
 
 <div id="app">
-	<span @mouseover="changeText">Text</span>
-	<p>{{ title }}</p>
-	<p :class="styleCSS">Цвет: {{ styleCSS }}</p>
-	<input type="text" v-on:input="styleCSS = $event.target.value">
-	<br/>
-	<br/>
-	<p v-if="show">Текст1</p>
-	<p v-else> Текст2</p>
+
 	<button v-on:click="show = !show">Скрыть / Показать</button>
+	<p v-if="show">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Libero, blanditiis?</p>
+	<p v-else> {{ message | lowercase | capatalize }}</p>
 	
 
 	<ul>
@@ -43,11 +38,18 @@
 </div>
 	
 <script>
+
+	Vue.filter ('capitalize', function(value) {
+		if(!value) return ''
+		value = value.toString()
+		return value.replace(/\b\w/g, function(l) {return l.toUpperCase() })
+	});
+
+
 	new Vue ({
 		el: '#app',
 		data: {
-			title: "Title title title",
-			styleCSS: '',
+			message: "Hello Vue",
 			show: false,
 			cars: [
 				{model: "BMW", speed: 250.8},
@@ -56,9 +58,14 @@
 				{model: "Ford", speed: 210.8},
 			]
 		},
-		methods: {
-			changeText () {
-				this.title = "New text"
+		computed: {
+			showMess(){
+				return this.message.toUpperCase()
+			}
+		},
+		filters: {
+			lowercase (value){
+				return value.toLowerCase()
 			}
 		}
 	})
